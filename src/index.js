@@ -10,20 +10,13 @@ const node_html_image = require('node-html-to-image')
 app.get('/forecast/:locality', async (req, res) => {
     let response = await handle_forecast_render_req(req.params)
 
-    res.status(response.status)
-    res.json(response)
+    if(response != null){
+        res.writeHead(200, { 'Content-Type': 'image/png' });
+        res.end(response, 'binary');
+    }else{
+        res.status(400)
+        res.json({message:"Bad request - can´t render an image"})
+    }
 })
-
-
-//Temp
-app.get(`/img`, async function(req, res) {
-    const image = await node_html_image({
-      html: '<html><body><div>Check out what I just did! #cool</div></body></html>'
-    });
-    res.writeHead(200, { 'Content-Type': 'image/png' });
-    res.end(image, 'binary');
-  });
-//--------------------------------------------
-
 
 app.listen(process.env.EXPRESS_PORT, console.log(`Api running at http://localhost:${process.env.EXPRESS_PORT}`))   

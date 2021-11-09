@@ -1,8 +1,12 @@
 const node_html_image = require('node-html-to-image')
 
-node_html_image({
-    output: './image.png',
-    html: '<html><body style="background:white">Hello world!</body></html>',
-    transparent:true
-  })
-.then(() => console.log('The image was created successfully!'))
+
+async function handler_render_html(params){
+  console.log(params)
+
+  return await node_html_image({
+    html: '<html><body><div>Hello</div></body></html>'
+  });
+}
+
+module.exports = handler_render_html
