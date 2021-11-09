@@ -17,12 +17,24 @@ async function handle_forecast_render_req(params){
 }
  
 async function handle_forecast_external_api_req(locality){
-    return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${locality}&appid=${process.env.WEATHER_API_KEY}`)
+    return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${locality}&units=metric&appid=${process.env.WEATHER_API_KEY}`)
         .then(res => {
-            return {status: res.status ,content: res.data}
+            let date_obj = new Date();
+            return {
+                status: res.status,
+                content: {
+                    main: res.data.main, 
+                    weather: res.data.weather, 
+                    name: res.data.name,
+                    timestamps: `${("0" + date_obj.getDate()).slice(-2)}-${("0" + (date_obj.getMonth() + 1)).slice(-2)}-${date_obj.getFullYear()} ${date_obj.getHours()}:${date_obj.getMinutes()}`
+                }
+            }
         })
-        .catch(err => {
-            return {status: 400, content: "Bad request - Something went wrong with the request"}
+        .catch(() => {
+            return {
+                status: 400, 
+                content: "Bad request - Something went wrong with the request"
+            }
         });
 }
 
