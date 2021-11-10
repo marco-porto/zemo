@@ -24,6 +24,7 @@ async function handle_forecast_external_api_req(locality){
                 content: {
                     main: res.data.main, 
                     weather: res.data.weather, 
+                    wind:res.data.wind,
                     name: res.data.name,
                     timestamps: `${("0" + date_obj.getDate()).slice(-2)}-${("0" + (date_obj.getMonth() + 1)).slice(-2)}-${date_obj.getFullYear()} ${date_obj.getHours()}:${date_obj.getMinutes()}`
                 }
@@ -33,10 +34,4 @@ async function handle_forecast_external_api_req(locality){
             return null
         });
 }
-
-
-function handle_forecast_image_render(params){
-    console.log()
-}
-
 module.exports = handle_forecast_render_req
