@@ -19,4 +19,4 @@ app.get('/forecast/:locality', async (req, res) => {
     }
 })
 
-app.listen(process.env.EXPRESS_PORT, console.log(`Api running at http://localhost:${process.env.PORT}`))   
+app.listen(process.env.EXPRESS_PORT, console.log(`Api running at port ${process.env.PORT}`))   
