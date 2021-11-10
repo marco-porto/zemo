@@ -7,7 +7,7 @@ Zemo is a web service with the function of generating an image with the predicti
 <br>
 <br>
 <div align="center">
-<img  width="50%" src="./forecast-card-img-readme.png"></div>
+<img  width="35%" src="./forecast-card-img-readme.png"></div>
 <br>
 <br>
 
