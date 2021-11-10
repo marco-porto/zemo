@@ -3,18 +3,16 @@ const handler_render_html = require('./render_html.js')
 
 async function handle_forecast_render_req(params){
     let message = null
-
     let regex = new RegExp(/^[a-zA-Z ]*$/)
-    let locality = params.locality
 
-    if(locality != null && locality != undefined){
-        if(regex.test(locality)){
-            message = await handle_forecast_external_api_req(locality)
+    if(params.locality != null && params.locality != undefined){
+        if(regex.test(params.locality)){
+            message = await handle_forecast_external_api_req(params.locality)
         }
     }
     return message
 }
- 
+
 async function handle_forecast_external_api_req(locality){
     return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${locality}&units=metric&appid=${process.env.WEATHER_API_KEY}`)
         .then(res => {

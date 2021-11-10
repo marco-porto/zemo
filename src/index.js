@@ -4,9 +4,8 @@ const express = require('express')
 const app = express();
 const handle_forecast_render_req = require('./handlers/render_forecast.js')
 
-app.get('/forecast/:locality', async (req, res) => {
+app.get('/:locality', async (req, res) => {
     let response = await handle_forecast_render_req(req.params)
-
     if(response != null){
         res.writeHead(200, { 'Content-Type': 'image/png' });
         res.end(response, 'binary');
