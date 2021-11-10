@@ -2,6 +2,7 @@ const node_html_image = require('node-html-to-image')
 
 async function handler_render_html(params){
   return await node_html_image({
+    puppeteerArgs:['--no-sandbox'],
     html: `<html><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
               <body style="width: 440px;height: 534px;font-family: Poppins;font-style: normal;display:flex;flex-direction: column; justify-content:center;background: radial-gradient(136.48% 153.46% at 98.7% 2.16%, rgba(4, 81, 157, 0.15) 0%, rgba(9, 85, 121, 0.15) 100%), linear-gradient(180deg, #0B0D41 0%, #060622 100%);">
                   <p style="font-weight: 600;font-size: 26px;text-align: center;color: #FFFFFF;text-transform: capitalize;">${params.content.weather[0].description}</p> 
