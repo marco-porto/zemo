@@ -12,8 +12,6 @@ async function handle_forecast_render_req(params){
             message = await handle_forecast_external_api_req(locality)
         }
     }
-
-    console.log(message)
     return message
 }
  
