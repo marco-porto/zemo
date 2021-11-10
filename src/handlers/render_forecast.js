@@ -9,14 +9,16 @@ async function handle_forecast_render_req(params){
 
     if(locality != null && locality != undefined){
         if(regex.test(locality)){
-            console.log(message)
             message =  await handle_forecast_external_api_req(locality)
         }
     }
+
+    console.log(message)
     return message
 }
  
 async function handle_forecast_external_api_req(locality){
+    console.log(process.env.WEATHER_API_KEY)
     return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${locality}&units=metric&appid=${process.env.WEATHER_API_KEY}`)
         .then(res => {
             let date_obj = new Date();
