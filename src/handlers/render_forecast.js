@@ -9,6 +9,7 @@ async function handle_forecast_render_req(params){
 
     if(locality != null && locality != undefined){
         if(regex.test(locality)){
+            console.log(message)
             message =  await handle_forecast_external_api_req(locality)
         }
     }
