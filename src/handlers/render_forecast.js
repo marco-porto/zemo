@@ -9,7 +9,7 @@ async function handle_forecast_render_req(params){
 
     if(locality != null && locality != undefined){
         if(regex.test(locality)){
-            message =  await handle_forecast_external_api_req(locality)
+            message = await handle_forecast_external_api_req(locality)
         }
     }
 
@@ -18,18 +18,16 @@ async function handle_forecast_render_req(params){
 }
  
 async function handle_forecast_external_api_req(locality){
-    console.log(process.env.WEATHER_API_KEY)
     return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${locality}&units=metric&appid=${process.env.WEATHER_API_KEY}`)
         .then(res => {
-            let date_obj = new Date();
+            console.log(res.data)
             return handler_render_html({
                 status: res.status,
                 content: {
                     main: res.data.main, 
                     weather: res.data.weather, 
                     wind:res.data.wind,
-                    name: res.data.name,
-                    timestamps: `${("0" + date_obj.getDate()).slice(-2)}-${("0" + (date_obj.getMonth() + 1)).slice(-2)}-${date_obj.getFullYear()} ${date_obj.getHours()}:${date_obj.getMinutes()}`
+                    name: res.data.name
                 }
             })
         })

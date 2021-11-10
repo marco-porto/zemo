@@ -1,11 +1,8 @@
 require('dotenv').config()
-const handle_forecast_render_req = require('./handlers/render_forecast.js')
 
 const express = require('express')
 const app = express();
-
-const node_html_image = require('node-html-to-image')
-
+const handle_forecast_render_req = require('./handlers/render_forecast.js')
 
 app.get('/forecast/:locality', async (req, res) => {
     console.log(req.params)
