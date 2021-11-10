@@ -10,7 +10,7 @@ async function handle_forecast_render_req(params){
             message = await handle_forecast_external_api_req(params.locality)
         }
     }
-    return message
+    return message;
 }
 
 async function handle_forecast_external_api_req(locality){
@@ -27,7 +27,7 @@ async function handle_forecast_external_api_req(locality){
             })
         })
         .catch(() => {
-            return null
+            return null;
         });
 }
-module.exports = handle_forecast_render_req
+module.exports = handle_forecast_render_req;
