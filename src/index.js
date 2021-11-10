@@ -8,6 +8,7 @@ const node_html_image = require('node-html-to-image')
 
 
 app.get('/forecast/:locality', async (req, res) => {
+    console.log(req.params)
     let response = await handle_forecast_render_req(req.params)
 
     if(response != null){
