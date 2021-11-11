@@ -4,7 +4,6 @@ const express = require('express')
 const app = express();
 const handle_forecast_render_req = require('./handlers/pull_forecast.js');
 
-console.log(process.env)
 app.get('/:locality', async (req, res) => {
     let response = await handle_forecast_render_req(req.params)
     if(response != null){
