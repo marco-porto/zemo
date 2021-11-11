@@ -7,8 +7,9 @@ const handle_forecast_render_req = require('./handlers/pull_forecast.js');
 app.get('/:locality', async (req, res) => {
     let response = await handle_forecast_render_req(req.params)
     if(response != null){
-        res.writeHead(200, { 'Content-Type': 'image/png' });
-        res.end(response, 'binary');
+        res.set('Content-Type', 'image/png');
+        res.status(200);
+        res.send(response);
     }else{
         res.status(400);
         res.json({message:"Bad request - can´t render an image"});
