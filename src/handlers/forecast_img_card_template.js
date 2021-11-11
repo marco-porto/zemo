@@ -25,11 +25,11 @@ let template = `<html>
                     <p style=font-weight:600;font-size:17px;line-height:15px>{{weather.temp.min}}º  </p>
                 </div>
                 <div style=padding:25px>
-                    <p style=font-size:14px;line-height:10px>Wind</p>
+                    <p style=font-size:14px;line-height:10px>Vento</p>
                     <p style=font-weight:600;font-size:17px;line-height:15px>{{weather.wind.speed}} km/h</p>
                 </div>
                 <div style=padding:25px>
-                    <p style=font-size:14px;line-height:10px>Humidity</p>
+                    <p style=font-size:14px;line-height:10px>Humididade</p>
                     <p style=font-weight:600;font-size:17px;line-height:15px>{{weather.humidity}} %</p>
                 </div>
             </div>
