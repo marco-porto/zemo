@@ -2,7 +2,6 @@ const node_html_image = require('node-html-to-image');
 const html_template = require('./forecast_img_card_template.js')
 
 async function handler_render_html(params){  
-  console.log(params)
   return await node_html_image({
     puppeteerArgs:{args:['--no-sandbox']},
     html: html_template,
