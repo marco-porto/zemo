@@ -14,7 +14,7 @@ async function handle_forecast_render_req(params){
 }
 
 async function handle_forecast_external_api_req(locality){
-    return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${locality}&units=metric&appid=${process.env.WEATHER_API_KEY}`)
+    return await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${locality}&lang=${process.env.WEATHER_API_LANG}&units=${process.env.WEATHER_API_UNITS}&appid=${process.env.WEATHER_API_KEY}`)
         .then(res => {
             return handler_render_html({
                 status: res.status,
