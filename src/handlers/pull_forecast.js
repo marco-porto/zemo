@@ -5,10 +5,15 @@ async function handle_forecast_render_req(params){
     let message = null
     let regex = new RegExp(/^[a-zA-Z ]*$/)
 
-    if(params.locality != null && params.locality != undefined){
-        if(regex.test(params.locality)){
-            message = await handle_forecast_external_api_req(params.locality)
-        }
+    if(params.locality != null && params.locality != undefined && regex.test(params.locality)){
+        message = await handle_forecast_external_api_req(params.locality)
+    }else{
+        message = await handler_render_html({
+            status:400,
+            content:{
+                error:"Bad request - Error"
+            }
+        });
     }
     return message;
 }
@@ -27,7 +32,12 @@ async function handle_forecast_external_api_req(locality){
             })
         })
         .catch(() => {
-            return null;
+            return handler_render_html({
+                status:400,
+                content:{
+                    error:"Bad request - Unknown Locality"
+                }
+            });
         });
 }
 module.exports = handle_forecast_render_req;

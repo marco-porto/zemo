@@ -1,27 +1,42 @@
 const node_html_image = require('node-html-to-image');
-const html_template = require('./forecast_img_card_template.js')
+const html_success_template = require('../templates/forecast_img_card_template.js');
+const html_error_template = require('../templates/error_img_card_template.js');
 
 async function handler_render_html(params){  
-  return await node_html_image({
-    puppeteerArgs:{args:['--no-sandbox']},
-    html: html_template,
-    content:{
-      locality:params.content.name,
-      weather:{
-        desc:params.content.weather[0].description,
-        img:translate_weather_to_image(params.content.weather[0].id),
-        temp:{
-          max:params.content.main.temp_max.toFixed(1),
-          min:params.content.main.temp_min.toFixed(1)
+  let out = {}
+  if(params.status == 200){
+    out.status = 200;
+    out.content = await node_html_image({
+      puppeteerArgs:{args:['--no-sandbox']},
+      html: html_success_template,
+        content:{
+          locality:params.content.name,
+          weather:{
+            desc:params.content.weather[0].description,
+            img:translate_weather_to_image(params.content.weather[0].id),
+            temp:{
+              max:params.content.main.temp_max.toFixed(1),
+              min:params.content.main.temp_min.toFixed(1)
+            },
+            wind:{
+              speed:(params.content.wind.speed * 3.6).toFixed(1)
+            },
+            humidity:params.content.main.humidity
+          }
         },
-        wind:{
-          speed:(params.content.wind.speed * 3.6).toFixed(1)
-        },
-        humidity:params.content.main.humidity
+      transparent:true
+    });  
+  }else{
+    out.status = 400;
+    out.content = await node_html_image({
+      puppeteerArgs:{args:['--no-sandbox']},
+      html: html_error_template,
+      content:{
+        error:params.content.error
       }
-    },
-    transparent:true
-  });
+    });  
+  }
+  return out;
 };
 
 function translate_weather_to_image(weather_id){
